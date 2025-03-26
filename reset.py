@@ -221,11 +221,17 @@ if __name__ == "__main__":
     logging.basicConfig(filename=log_filename, level=logging.INFO, format="%(asctime)s - %(message)s")
             #duration =  10  
             #glitch_voltage_list = list(np.arange(-7.4, 4.3, 0.1))
-    glitch_voltage_list = list(np.arange(-7.4, 4.3, 0.1))
+    
+    left_sweep = np.arange(-7.4, -5.11, 0.1)
+    fine_grained_interval = np.arange(-5.10, -4.89, 0.01)
+    right_sweep = np.arange(-4.89, 4.21, 0.1)
+
+    glitch_voltage_list = np.concatenate((left_sweep, fine_grained_interval, right_sweep))
+    glitch_voltage_list = np.round(glitch_voltage_list, 3) 
             #log this print statement
             #while time.time() - start_time < duration: 
     for glitch_voltage_p in glitch_voltage_list:
-        for i in range(4):
+        for i in range(50):
                     #if trigger_generated:
             print("###",i,glitch_voltage_p)
             print "Trigger detected (HIGH). Running digital glitch..."
